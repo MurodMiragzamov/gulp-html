@@ -1,4 +1,4 @@
-const { src, dest } = require("gulp"),
+const { src, dest, series, watch } = require("gulp"),
   sass = require("gulp-sass"),
   csso = require("gulp-csso"),
   include = require("gulp-file-include"),
@@ -13,6 +13,11 @@ function html() {
     .pipe(
       include({
         prefix: "@@",
+      })
+    )
+    .pipe(
+      htmlmin({
+        collapseWhitespace: true,
       })
     )
     .pipe(dest("dist"));
@@ -31,5 +36,18 @@ function scss() {
     .pipe(dest("dist"));
 }
 
-exports.html = html;
-exports.scss = scss;
+function clear() {
+  return del("dist");
+}
+function serve() {
+  sync.init({
+    server: "./dist",
+  });
+  watch("src/**.html", series(html)).on("change", sync.reload);
+  watch("src/scss/**.scss", series(scss)).on("change", sync.reload);
+}
+
+// exports.html = html;
+// exports.scss = scss;
+exports.build = series(clear, scss, html);
+exports.serve = series(clear, scss, html, serve);
