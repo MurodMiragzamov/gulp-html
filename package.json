@@ -16,5 +16,14 @@
   "bugs": {
     "url": "https://github.com/nameHugo/gulp-html/issues"
   },
-  "homepage": "https://github.com/nameHugo/gulp-html#readme"
+  "homepage": "https://github.com/nameHugo/gulp-html#readme",
+  "devDependencies": {
+    "browser-sync": "^2.27.7",
+    "del": "^6.0.0",
+    "gulp": "^4.0.2",
+    "gulp-csso": "^4.0.1",
+    "gulp-file-include": "^2.3.0",
+    "gulp-htmlmin": "^5.0.1",
+    "gulp-sass": "^5.0.0"
+  }
 }
